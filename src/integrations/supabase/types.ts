@@ -14,16 +14,305 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      attendance: {
+        Row: {
+          device_id: string | null
+          id: string
+          recorded_at: string
+          session_id: string
+          status: string
+          student_id: string
+        }
+        Insert: {
+          device_id?: string | null
+          id?: string
+          recorded_at?: string
+          session_id: string
+          status?: string
+          student_id: string
+        }
+        Update: {
+          device_id?: string | null
+          id?: string
+          recorded_at?: string
+          session_id?: string
+          status?: string
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "attendance_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      attendance_sessions: {
+        Row: {
+          created_at: string
+          ends_at: string | null
+          id: string
+          require_device: boolean
+          require_room_code: boolean
+          room_code: string | null
+          started_at: string | null
+          status: string
+          subject_id: string
+          teacher_id: string
+        }
+        Insert: {
+          created_at?: string
+          ends_at?: string | null
+          id?: string
+          require_device?: boolean
+          require_room_code?: boolean
+          room_code?: string | null
+          started_at?: string | null
+          status?: string
+          subject_id: string
+          teacher_id: string
+        }
+        Update: {
+          created_at?: string
+          ends_at?: string | null
+          id?: string
+          require_device?: boolean
+          require_room_code?: boolean
+          room_code?: string | null
+          started_at?: string | null
+          status?: string
+          subject_id?: string
+          teacher_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_sessions_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      challenges: {
+        Row: {
+          created_at: string
+          expires_at: string
+          id: string
+          sequence: Json
+          session_id: string
+          student_id: string
+          used_at: string | null
+        }
+        Insert: {
+          created_at?: string
+          expires_at: string
+          id?: string
+          sequence: Json
+          session_id: string
+          student_id: string
+          used_at?: string | null
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          sequence?: Json
+          session_id?: string
+          student_id?: string
+          used_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "challenges_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "attendance_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      devices: {
+        Row: {
+          created_at: string
+          id: string
+          label: string
+          public_key: string | null
+          revoked_at: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          label?: string
+          public_key?: string | null
+          revoked_at?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          label?: string
+          public_key?: string | null
+          revoked_at?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string
+          id: string
+          reg_no: string | null
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          full_name?: string
+          id: string
+          reg_no?: string | null
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string
+          id?: string
+          reg_no?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
+      qr_tokens: {
+        Row: {
+          expires_at: string
+          id: string
+          issued_at: string
+          session_id: string
+          token_id: string
+        }
+        Insert: {
+          expires_at: string
+          id?: string
+          issued_at?: string
+          session_id: string
+          token_id: string
+        }
+        Update: {
+          expires_at?: string
+          id?: string
+          issued_at?: string
+          session_id?: string
+          token_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "qr_tokens_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "attendance_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      security_events: {
+        Row: {
+          created_at: string
+          decision: string
+          event_type: string
+          explanation: string
+          id: string
+          review_status: string
+          session_id: string | null
+          severity: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          decision?: string
+          event_type: string
+          explanation?: string
+          id?: string
+          review_status?: string
+          session_id?: string | null
+          severity?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          decision?: string
+          event_type?: string
+          explanation?: string
+          id?: string
+          review_status?: string
+          session_id?: string | null
+          severity?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      subjects: {
+        Row: {
+          code: string
+          department: string
+          id: string
+          name: string
+          teacher_id: string
+        }
+        Insert: {
+          code: string
+          department?: string
+          id?: string
+          name: string
+          teacher_id: string
+        }
+        Update: {
+          code?: string
+          department?: string
+          id?: string
+          name?: string
+          teacher_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "teacher" | "student"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +439,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "teacher", "student"],
+    },
   },
 } as const
