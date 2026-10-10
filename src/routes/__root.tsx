@@ -48,8 +48,8 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
           This page didn't load
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+        <p className="mt-2 text-sm text-destructive font-mono-x bg-destructive/10 p-3 rounded-lg border border-destructive/20 text-left overflow-auto max-h-48 text-xs">
+          {error instanceof Error ? `${error.name}: ${error.message}\n${error.stack}` : JSON.stringify(error)}
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -78,11 +78,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "AttendX — Multi-Layer Secure Attendance & Anti-Proxy Platform" },
+      { name: "description", content: "Right Student. Right Place. Right Time. Rotating QR codes, one-time challenges and device verification that stop proxy attendance." },
+      { name: "author", content: "AttendX" },
+      { property: "og:title", content: "AttendX — Secure Attendance & Anti-Proxy Platform" },
+      { property: "og:description", content: "Multi-layer attendance verification: rotating signed QR tokens, challenge-response, and registered devices." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -93,6 +93,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" },
     ],
   }),
   shellComponent: RootShell,
