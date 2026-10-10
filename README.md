@@ -2,11 +2,23 @@
 
 > **Right Student. Right Place. Right Time.**
 
-A cybersecurity hackathon prototype demonstrating how multiple authentication and verification mechanisms can reduce proxy attendance and replay attacks.
+A cutting-edge cybersecurity platform demonstrating multi-vector authentication, dynamic rolling OTPs, rotating cryptographic QR tokens, and real-time fraud telemetry to eliminate proxy attendance and replay attacks.
+
+**Repository:** [https://github.com/MOHITBALAJI/cyberthon.git](https://github.com/MOHITBALAJI/cyberthon.git)
 
 ---
 
-## 🛡️ Security Architecture
+## 💻 3-Laptop Live Demonstration Setup
+
+| Node | Screen / URL | Role & Workflow |
+| :--- | :--- | :--- |
+| **Laptop 1: Server & Admin Sentinel** | `http://localhost:8080/admin`<br/>`http://localhost:8080/security` | Real-time security telemetry, Recharts fraud analysis, forensic event logging, and user management. |
+| **Laptop 2: Teacher Session Manager** | `http://<HOST_IP>:8080/teacher` | Broadcasts 25-second HMAC-SHA256 rotating QR tokens and a live 6-digit rolling **Session Security OTP**. Displays live attendance via Supabase WebSockets. |
+| **Laptop 3: Student Verification Client** | `http://<HOST_IP>:8080/student`<br/>`http://<HOST_IP>:8080/scan` | Enters 6-digit session OTP or scans QR code. Executes the **Tri-Vector Sentinel** check (Biometrics, IP Blanket, Geo-fence) and commits verified attendance. |
+
+---
+
+## 🛡️ Security Architecture & Algorithms
 
 AttendX implements **8 verification layers** before accepting any attendance submission:
 
